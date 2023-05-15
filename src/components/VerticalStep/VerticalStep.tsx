@@ -1,12 +1,9 @@
-import { Box } from "@chakra-ui/layout";
 import {
   Button,
   Flex,
   Grid,
   GridItem,
   useBreakpointValue,
-} from "@chakra-ui/react";
-import {
   Step,
   StepDescription,
   StepIndicator,
@@ -15,15 +12,17 @@ import {
   StepStatus,
   StepTitle,
   Stepper,
+  Box,
   useSteps,
 } from "@chakra-ui/react";
-
 import FormOne from "@src/components/Form/FormOne";
 
 import BgDesktopIcon from "@public/assets/icons/bg-sidebar-desktop.svg";
 import BgMobileIcon from "@public/assets/icons/bg-sidebar-mobile.svg";
 
 import VerticalStepStyle from "./VerticalStep.style";
+import { FormikProps } from "formik";
+import { AppFormType } from "@src/utils/types";
 
 const steps = [
   { title: "STEP 1", description: "YOUR INFO" },
@@ -32,8 +31,12 @@ const steps = [
   { title: "STEP 4", description: "SUMMARY" },
 ];
 
-const VerticalStep = () => {
-  const { activeStep, setActiveStep, goToNext, goToPrevious } = useSteps({
+type Props = {
+  formikProp: FormikProps<AppFormType>;
+};
+
+const VerticalStep = ({ formikProp }: Props) => {
+  const { activeStep, goToNext, goToPrevious } = useSteps({
     index: 1,
     count: steps.length,
   });
@@ -52,9 +55,9 @@ const VerticalStep = () => {
         width="100%"
         justify="flex-end"
         gap={4}
-        position={isMobile ? "absolute" : "relative"}
+        position={"relative"}
         bottom={"0px"}
-        marginTop={isMobile ? "0px" : "-20px"}
+        marginTop={isMobile ? "30px" : "-20px"}
         background={isMobile ? "gray.400" : "white"}
         borderBottomRightRadius={isMobile ? "0px" : "10px"}
         paddingBottom={isMobile ? "10px" : "60px"}
@@ -62,8 +65,15 @@ const VerticalStep = () => {
         paddingRight={isMobile ? "10px" : "100px"}
       >
         {hasCompletedAllSteps ? (
-          <Button size="md" onClick={() => setActiveStep(1)}>
-            Reset
+          <Button
+            type="submit"
+            isLoading={formikProp.isSubmitting}
+            size="md"
+            background={"blue.100"}
+            color={"gray.200"}
+            _hover={{ color: "gray.200", background: "blue.100" }}
+          >
+            Confirm
           </Button>
         ) : (
           <>
@@ -73,10 +83,19 @@ const VerticalStep = () => {
               size="md"
               variant="ghost"
               marginRight={isMobile ? "0px" : "30px"}
+              background={"blue.100"}
+              color={"gray.200"}
+              _hover={{ color: "blue.100", background: "gray.300" }}
             >
               Go Back
             </Button>
-            <Button size="md" onClick={goToNext}>
+            <Button
+              size="md"
+              onClick={goToNext}
+              background={"blue.100"}
+              color={"gray.200"}
+              _hover={{ color: "blue.100", background: "gray.300" }}
+            >
               {isLastStep ? "Finish" : "Next Step"}
             </Button>
           </>
@@ -94,7 +113,6 @@ const VerticalStep = () => {
         borderRadius={"10px"}
       >
         <Grid
-          templateRows={isMobile ? "" : "repeat(2, 1fr)"}
           templateColumns={isMobile ? "" : "repeat(5, 1fr)"}
           gap={isMobile ? 3 : 0}
           width={"100%"}
@@ -113,17 +131,19 @@ const VerticalStep = () => {
             paddingLeft={isMobile ? "65px" : "72px"}
             paddingRight={isMobile ? "65px" : "72px"}
             paddingTop={isMobile ? "30px" : "30px"}
-            paddingBottom={isMobile ? "10px" : "30px"}
-            height={"auto"}
+            paddingBottom={isMobile ? "100px" : "30px"}
+            height={isMobile ? "auto" : "600px"}
             borderTopLeftRadius={isMobile ? "0px" : "10px"}
             borderTopRightRadius={isMobile ? "0px" : "10px"}
+            borderBottomLeftRadius={isMobile ? "0px" : "10px"}
+            borderBottomRightRadius={isMobile ? "0px" : "10px"}
           >
             <Stepper
               index={activeStep}
               colorScheme="blue"
               orientation={orientation}
               width="auto"
-              height={isMobile ? "50px" : "auto"}
+              height={isMobile ? "50px" : "300px"}
               gap="0"
               sx={VerticalStepStyle.stepper}
             >
@@ -156,13 +176,15 @@ const VerticalStep = () => {
             paddingLeft={isMobile ? "30px" : "100px"}
             paddingRight={isMobile ? "30px" : "100px"}
             paddingTop={isMobile ? "30px" : "50px"}
-            paddingBottom={isMobile ? "10px" : "0px"}
+            paddingBottom={isMobile ? "100px" : "0px"}
             marginRight={isMobile ? "10px" : "-20px"}
             marginLeft={isMobile ? "10px" : "0px"}
             marginTop={isMobile ? "-67px" : "0px"}
             background={"white"}
-            borderTopLeftRadius={isMobile ? "10px" : "0px"}
-            borderTopRightRadius={isMobile ? "10px" : "0px"}
+            borderTopLeftRadius={isMobile ? "10px" : "10px"}
+            borderBottomLeftRadius={isMobile ? "10px" : "10px"}
+            borderTopRightRadius={isMobile ? "10px" : "10px"}
+            borderBottomRightRadius={isMobile ? "10px" : "10px"}
           >
             <Flex flexDir={"column"}>
               <FormOne />

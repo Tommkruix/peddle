@@ -1,9 +1,19 @@
 "use client";
 
-import VerticalStep from "@src/components/VerticalStep/VerticalStep";
 import { Flex, useBreakpointValue } from "@chakra-ui/react";
+import { Form, Formik } from "formik";
+
+import VerticalStep from "@src/components/VerticalStep/VerticalStep";
+import { useState } from "react";
+import { AppFormType } from "@src/utils/types";
 
 function Home() {
+  const [data, setData] = useState<AppFormType>({
+    name: "",
+    email: "",
+    phoneNumber: "",
+  });
+
   const isMobile = useBreakpointValue({
     lg: false,
     md: false,
@@ -20,7 +30,21 @@ function Home() {
       background={isMobile ? "none" : "gray.200"}
       height={isMobile ? "300px" : "900px"}
     >
-      <VerticalStep />
+      <Formik
+        initialValues={data}
+        onSubmit={(values, actions) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            actions.setSubmitting(false);
+          }, 1000);
+        }}
+      >
+        {(props) => (
+          <Form>
+            <VerticalStep formikProp={props} />
+          </Form>
+        )}
+      </Formik>
     </Flex>
   );
 }
