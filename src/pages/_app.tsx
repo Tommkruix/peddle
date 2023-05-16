@@ -1,7 +1,7 @@
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 
-import theme from "@src/pages/theme";
+import theme from "@src/utils/theme";
 import "@src/pages/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
