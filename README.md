@@ -18,6 +18,17 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Notes
+
+- Implemented [Learn Chakra-UI](https://chakra-ui.com/) for the UI design
+- Set up theming for the application
+- All forms could not be completed because of time
+- Design not fully optimized
+- Best practices and standards not fully focused instead focused more on look and feel
+- Some components can be improved to be fully reusable.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
