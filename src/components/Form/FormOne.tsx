@@ -12,7 +12,7 @@ import { Field } from "formik";
 import { AppFieldPropsType } from "@src/utils/types";
 import { validateField } from "@src/utils/helpers";
 
-const FormOne = () => {
+const FormOne: React.FC = () => {
   return (
     <Box>
       <Heading color={"blue.100"} fontWeight={"bold"}>
