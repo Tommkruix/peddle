@@ -75,7 +75,7 @@ const VerticalStep: React.FC<Props> = ({ formikProp }: Props) => {
         width="100%"
         justify="flex-end"
         gap={4}
-        position={"relative"}
+        position={isMobile ? "fixed" : "relative"}
         bottom={"0px"}
         marginTop={isMobile ? "30px" : "-20px"}
         background={isMobile ? "gray.400" : "white"}
